@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <style>
+    /* ======= CSS ======= */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      width: 400px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .message.user {
+      background-color: #DCF8C6;
+      text-align: right;
+    }
+
+    .message.bot {
+      background-color: #eee;
+      text-align: left;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Simple Chat App</h2>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <!-- Messages will appear here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Type a message...">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    /* ======= JS ======= */
+
+    // Utility function to create message element
+    function createMessageElement(message, sender) {
+      const div = document.createElement('div');
+      div.classList.add('message', sender);
+      div.innerText = message;
+      return div;
+    }
+
+    const messagesContainer = document.getElementById('chat-messages');
+    const inputField = document.getElementById('message-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    function sendMessage() {
+      const message = inputField.value.trim();
+      if (message === "") return;
+
+      // Add user message
+      messagesContainer.appendChild(createMessageElement(message, 'user'));
+
+      // Clear input
+      inputField.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // Simulate bot response
+      setTimeout(() => {
+        const botMessage = `You said: "${message}"`;
+        messagesContainer.appendChild(createMessageElement(botMessage, 'bot'));
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }, 500);
+    }
+
+    // Send message on button click
+    sendBtn.addEventListener('click', sendMessage);
+
+    // Send message on Enter key
+    inputField.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
