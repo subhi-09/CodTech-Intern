@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Platform</title>
+  <style>
+    /* ===== CSS ===== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 12px 16px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .course-card {
+      background-color: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 6px;
+      box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    }
+
+    .course-card h3 {
+      margin: 0;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    #course-detail {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Learning Platform</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('courses')">Courses</a>
+  </nav>
+
+  <div class="container" id="home">
+    <h2>Welcome to the Learning Platform!</h2>
+    <p>Explore courses and learn new skills.</p>
+  </div>
+
+  <div class="container" id="courses" style="display:none;">
+    <h2>Available Courses</h2>
+    <div class="course-card">
+      <h3>Web Development</h3>
+      <button class="btn" onclick="showCourseDetail('Web Development', 'Learn HTML, CSS, and JS to build websites.')">View Details</button>
+    </div>
+    <div class="course-card">
+      <h3>Python Programming</h3>
+      <button class="btn" onclick="showCourseDetail('Python Programming', 'Learn Python basics, data analysis, and more.')">View Details</button>
+    </div>
+    <div class="course-card">
+      <h3>Data Science</h3>
+      <button class="btn" onclick="showCourseDetail('Data Science', 'Analyze data and build predictive models.')">View Details</button>
+    </div>
+  </div>
+
+  <div class="container" id="course-detail">
+    <h2 id="course-title"></h2>
+    <p id="course-desc"></p>
+    <button class="btn" onclick="backToCourses()">Back to Courses</button>
+  </div>
+
+  <script>
+    /* ===== JS ===== */
+    function showPage(page) {
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('courses').style.display = 'none';
+      document.getElementById('course-detail').style.display = 'none';
+
+      if(page === 'home') document.getElementById('home').style.display = 'block';
+      if(page === 'courses') document.getElementById('courses').style.display = 'block';
+    }
+
+    function showCourseDetail(title, desc) {
+      document.getElementById('courses').style.display = 'none';
+      document.getElementById('course-detail').style.display = 'block';
+      document.getElementById('course-title').innerText = title;
+      document.getElementById('course-desc').innerText = desc;
+    }
+
+    function backToCourses() {
+      document.getElementById('course-detail').style.display = 'none';
+      document.getElementById('courses').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
